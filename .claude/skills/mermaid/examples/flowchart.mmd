@@ -1,0 +1,41 @@
+flowchart TD
+    subgraph Terminals
+        A([Stadium Start])
+        B([Stadium End])
+    end
+
+    subgraph Processes
+        C[Rectangle Process]
+        D[[Subroutine]]
+        E[(Database)]
+    end
+
+    subgraph Decisions
+        F{Diamond Decision}
+        G{{Hexagon}}
+    end
+
+    subgraph Input/Output
+        H[/Parallelogram/]
+        I[\Parallelogram Alt\]
+        J[/Trapezoid\]
+        K[\Trapezoid Alt/]
+    end
+
+    subgraph Other
+        L((Circle))
+        M>Asymmetric Flag]
+    end
+
+    A --> C
+    C --> F
+    F -->|Yes| D
+    F -->|No| G
+    D --> E
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+    K --> L
+    L --> M
+    M --> B

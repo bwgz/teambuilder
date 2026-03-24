@@ -1,0 +1,64 @@
+---
+title: Entity Relationship Diagram Example - Trimble Theme
+---
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    CUSTOMER {
+        uuid id PK
+        string email UK
+        string name
+        string phone
+        timestamp created_at
+    }
+
+    ORDER ||--|{ ORDER_ITEM : contains
+    ORDER {
+        uuid id PK
+        uuid customer_id FK
+        timestamp order_date
+        string status
+        decimal total_amount
+    }
+
+    ORDER_ITEM }|--|| PRODUCT : references
+    ORDER_ITEM {
+        uuid id PK
+        uuid order_id FK
+        uuid product_id FK
+        int quantity
+        decimal unit_price
+    }
+
+    PRODUCT ||--o{ INVENTORY : "tracked in"
+    PRODUCT {
+        uuid id PK
+        string sku UK
+        string name
+        text description
+        decimal price
+        uuid category_id FK
+    }
+
+    CATEGORY ||--o{ PRODUCT : contains
+    CATEGORY {
+        uuid id PK
+        string name
+        string slug UK
+        uuid parent_id FK
+    }
+
+    INVENTORY {
+        uuid id PK
+        uuid product_id FK
+        uuid warehouse_id FK
+        int quantity
+        timestamp last_updated
+    }
+
+    WAREHOUSE ||--o{ INVENTORY : stores
+    WAREHOUSE {
+        uuid id PK
+        string name
+        string location
+        boolean is_active
+    }

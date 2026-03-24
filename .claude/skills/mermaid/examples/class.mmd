@@ -1,0 +1,59 @@
+classDiagram
+%% Class Diagram Example - Trimble Theme
+%%
+%% Theme Impact:
+%% - Class boxes: primaryColor (#0063A3 Trimble Blue) header with white text
+%% - Class body: Light background with classText color (#252A2E light / #F1F1F6 dark)
+%% - Borders: primaryBorderColor (#004F83 light / #89C6ED dark)
+%% - Relationship lines: lineColor (#585C65 light / #A3A6B1 dark)
+%% - Relationship labels: textColor for cardinality and descriptions
+%% - Arrow styles: Solid for association, dashed for dependency
+%% - Compartments: Attributes and methods sections clearly separated
+    class User {
+        +String id
+        +String email
+        +String name
+        +Date createdAt
+        +authenticate(password) bool
+        +updateProfile(data) void
+    }
+
+    class Order {
+        +String id
+        +Date orderDate
+        +String status
+        +Decimal total
+        +addItem(item) void
+        +removeItem(itemId) void
+        +calculateTotal() Decimal
+    }
+
+    class Product {
+        +String id
+        +String name
+        +String description
+        +Decimal price
+        +Int stock
+        +updateStock(quantity) void
+    }
+
+    class OrderItem {
+        +String id
+        +Int quantity
+        +Decimal unitPrice
+        +getSubtotal() Decimal
+    }
+
+    class Payment {
+        +String id
+        +Decimal amount
+        +String method
+        +String status
+        +process() bool
+        +refund() bool
+    }
+
+    User "1" --> "*" Order : places
+    Order "1" --> "*" OrderItem : contains
+    OrderItem "*" --> "1" Product : references
+    Order "1" --> "1" Payment : has

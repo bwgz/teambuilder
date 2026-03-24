@@ -1,0 +1,46 @@
+gitGraph
+%% Git Graph Example - Trimble Theme
+%%
+%% Theme Impact:
+%% - Branch colors cycle through git0-git7:
+%%   main:    #0063A3 (Trimble Blue 10)    feature4: #0E416C (Navy Blue)
+%%   develop: #349C44 (Trimble Green 10)   feature5: #006638 (Green 13)
+%%   feature: #FBAD26 (Trimble Gold 10)    feature6: #E49325 (Yellow 12)
+%%   hotfix:  #B44E2A (Trimble Brown 10)   feature7: #7C291A (Brown 13)
+%% - Branch labels: gitBranchLabel0-7 colors (white/dark for contrast)
+%% - Commit dots: Colored to match their branch
+%% - Commit labels: commitLabelColor (#252A2E light / #F1F1F6 dark)
+%% - Commit label background: commitLabelBackground (#FFFFFF light / #353A40 dark)
+%% - Tags: tagLabelBackground (#0063A3 Trimble Blue) with white text
+%% - Tag borders: tagLabelBorder (#004F83 light / #89C6ED dark)
+%% - Merge lines: Connect branches with respective branch colors
+    commit id: "Initial commit"
+    commit id: "Add project structure"
+    branch develop
+    checkout develop
+    commit id: "Setup dev environment"
+    commit id: "Add base configuration"
+    branch feature/auth
+    checkout feature/auth
+    commit id: "Add login form"
+    commit id: "Implement JWT auth"
+    commit id: "Add session management"
+    checkout develop
+    merge feature/auth id: "Merge auth feature"
+    branch feature/dashboard
+    checkout feature/dashboard
+    commit id: "Create dashboard layout"
+    commit id: "Add widgets"
+    checkout develop
+    merge feature/dashboard id: "Merge dashboard"
+    checkout main
+    merge develop id: "Release v1.0" tag: "v1.0.0"
+    checkout develop
+    commit id: "Post-release updates"
+    branch hotfix/security
+    checkout hotfix/security
+    commit id: "Fix XSS vulnerability"
+    checkout main
+    merge hotfix/security id: "Hotfix" tag: "v1.0.1"
+    checkout develop
+    merge hotfix/security id: "Sync hotfix"

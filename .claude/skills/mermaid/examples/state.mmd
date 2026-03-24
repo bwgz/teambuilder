@@ -1,0 +1,44 @@
+stateDiagram-v2
+%% State Diagram Example - Trimble Theme
+%%
+%% Theme Impact:
+%% - State boxes: primaryColor (#0063A3 Trimble Blue) with white text
+%% - Composite states: Outlined container with nested states inside
+%% - Start/end markers: Filled circles using primaryColor
+%% - Transitions: lineColor (#585C65 light / #A3A6B1 dark) arrows
+%% - Transition labels: textColor for action descriptions
+%% - Fork/join bars: lineColor for synchronization bars
+%% - Nested states: Inherit theme colors, slightly lighter backgrounds
+%% - Choice points: Diamond shapes with primaryColor
+    [*] --> Draft
+
+    Draft --> PendingReview : Submit
+    Draft --> Draft : Save
+
+    PendingReview --> InReview : Assign Reviewer
+    PendingReview --> Draft : Request Changes
+
+    InReview --> Approved : Approve
+    InReview --> Rejected : Reject
+    InReview --> PendingReview : Reassign
+
+    Approved --> Published : Publish
+    Approved --> Draft : Revise
+
+    Rejected --> Draft : Revise
+    Rejected --> Archived : Archive
+
+    Published --> Archived : Deprecate
+    Published --> Draft : Create New Version
+
+    Archived --> [*]
+
+    state InReview {
+        [*] --> TechnicalReview
+        TechnicalReview --> ContentReview : Technical OK
+        TechnicalReview --> NeedsWork : Issues Found
+        ContentReview --> FinalApproval : Content OK
+        ContentReview --> NeedsWork : Issues Found
+        NeedsWork --> TechnicalReview : Fixed
+        FinalApproval --> [*]
+    }

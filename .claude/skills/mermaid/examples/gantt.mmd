@@ -1,0 +1,42 @@
+gantt
+%% Gantt Chart Example - Trimble Theme
+%%
+%% Theme Impact:
+%% - Task bars: taskBkgColor (#0063A3 Trimble Blue) with white text
+%% - Active tasks: activeTaskBkgColor (#FBAD26 Trimble Gold) - highlights current work
+%% - Done tasks: doneTaskBkgColor (#349C44 Trimble Green) - shows completion
+%% - Critical tasks: critBkgColor (#B44E2A Trimble Brown) - emphasizes critical path
+%% - Milestones: Diamond markers using primaryColor
+%% - Today line: todayLineColor (#FBAD26 Trimble Gold) vertical marker
+%% - Section backgrounds: Alternating sectionBkgColor (#DCEDF9, #E0ECCF, #FFF5E4)
+%% - Grid lines: lineColor for time axis
+%% - Labels: textColor for dates and task names
+%% - Layout: barHeight 20px, barGap 4px, axisFormat %Y-%m-%d
+    title Project Development Timeline
+    dateFormat YYYY-MM-DD
+    excludes weekends
+
+    section Planning
+    Requirements Gathering     :done,    req, 2024-01-01, 2w
+    System Design             :done,    design, after req, 2w
+    Architecture Review       :done,    review, after design, 3d
+
+    section Development
+    Backend API Development   :active,  api, 2024-01-29, 4w
+    Database Schema           :done,    db, 2024-01-29, 1w
+    Frontend Development      :         fe, after db, 4w
+    Integration               :         int, after api, 2w
+
+    section Testing
+    Unit Testing              :         unit, after db, 5w
+    Integration Testing       :         inttest, after int, 2w
+    UAT                       :         uat, after inttest, 1w
+
+    section Deployment
+    Staging Deployment        :         staging, after uat, 3d
+    Production Deployment     :crit,    prod, after staging, 2d
+    Post-Launch Support       :         support, after prod, 1w
+
+    section Milestones
+    MVP Ready                 :milestone, mvp, 2024-03-01, 0d
+    Go Live                   :milestone, golive, 2024-03-20, 0d

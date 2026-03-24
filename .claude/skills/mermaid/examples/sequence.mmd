@@ -1,0 +1,44 @@
+sequenceDiagram
+%% Sequence Diagram Example - Trimble Theme
+%%
+%% Theme Impact:
+%% - Actors (participant boxes): actorBkg (#0063A3 Trimble Blue) with white text
+%% - Actor borders: actorBorder (#004F83 light / #89C6ED dark)
+%% - Lifelines: actorLineColor (#585C65 light / #A3A6B1 dark)
+%% - Messages/arrows: signalColor with textColor for labels
+%% - Activation bars: activationBkgColor (#C7E2F6 light / #0E416C dark)
+%% - Notes: noteBkgColor (#FFF5E4 cream light / #464B52 gray dark) with Gold border
+%% - Alt/Loop boxes: labelBoxBkgColor (#DCEDF9 light / #003054 dark)
+%% - Sequence numbers: sequenceNumberColor (#FFFFFF) on Blue background
+%% - Layout: actorMargin 50px, messageMargin 35px, mirrorActors enabled
+    autonumber
+    participant U as User
+    participant C as Client App
+    participant A as API Gateway
+    participant S as Auth Service
+    participant D as Database
+
+    U->>C: Click Login
+    C->>A: POST /auth/login
+    A->>S: Validate Credentials
+    S->>D: Query User
+    D-->>S: User Data
+    alt Valid User
+        S-->>A: JWT Token
+        A-->>C: 200 OK + Token
+        C-->>U: Redirect to Dashboard
+    else Invalid User
+        S-->>A: Authentication Failed
+        A-->>C: 401 Unauthorized
+        C-->>U: Show Error Message
+    end
+
+    Note over U,C: User is now authenticated
+    U->>C: Request Protected Resource
+    C->>A: GET /api/data (with JWT)
+    A->>S: Verify Token
+    S-->>A: Token Valid
+    A->>D: Fetch Data
+    D-->>A: Data Response
+    A-->>C: 200 OK + Data
+    C-->>U: Display Data
