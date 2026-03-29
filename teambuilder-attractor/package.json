@@ -1,0 +1,30 @@
+{
+  "name": "team-builder",
+  "version": "1.0.0",
+  "description": "A library for distributing participants into balanced teams using RANDOM or FAIR (snake-draft) strategies.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "team",
+    "builder",
+    "distribution",
+    "fair",
+    "random"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^2.0.0"
+  }
+}
