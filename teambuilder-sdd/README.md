@@ -1,4 +1,4 @@
-# Teambuilder — Example 01
+# Teambuilder — SDD
 
 A pure Java library that divides participants into teams using random or ability-based fairness strategies.
 
